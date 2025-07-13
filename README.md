@@ -10,5 +10,5 @@ Adicional todo sera realizado en HTML y CSS adicional se crearan ramas para cuan
 
 [![GitHub Streak](https://github-readme-streak-stats.herokuapp.com?user=%20KennethOAA&theme=react&short_numbers=true&date_format=j%20M%5B%20Y%5D)](https://git.io/KennethOAA/Proyecto_Tareas_App/blob/main)
 
-![Kenneth Andrade Stats](https://github-readme-stats.vercel.app/api?username=anuraghazra&show_icons=true&theme=transparent)
+![Kenneth Andrade Stats](https://github-readme-stats.vercel.app/api?username=KennethOAA&show_icons=true&theme=transparent)
 
