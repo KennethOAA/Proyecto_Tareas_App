@@ -1,19 +1,26 @@
 import { Tarea } from './tarea.js';
-//localStorage.clear();
+
 const input = document.getElementById('taskInput');
 const boton = document.getElementById('addTaskButton');
 const taskList = document.getElementById('taskList');
 const taskDate = document.getElementById('taskDate');
 const taskDateLimit = document.getElementById('taskDateLimit');
 
+//Boton de limpieza
+const botonLimpiar = document.getElementById('clearButton');
+
 function mostrarTarea(tarea) {
     const li = document.createElement('li');
     li.innerHTML = `
-  <div>
-    <span>${tarea.getTexto()}</span>
-    ${tarea.getFechaAgendada() ? `<br>📅 ${tarea.getFechaAgendada()}` : ''}
-  </div>
-`;
+    <div>
+      <span>${tarea.getTexto()}</span>
+      ${
+        tarea.getFechaAgendada()
+          ? `<br>📅 ${tarea.getFechaAgendada()} ${tarea.getFechaLimite ? ` hasta 📅 ${tarea.getFechaLimite()}` : ''}`
+          : ''
+      }
+    </div>
+  `;
     li.className = "bg-white p-3 rounded shadow hover:bg-gray-100 cursor-pointer";
     taskList.appendChild(li);
     li.addEventListener('click', function () {
@@ -52,12 +59,19 @@ if (tareasGuardadas) {
 boton.addEventListener('click', function () {
     const tastValue = input.value.trim();
     const fechaSeleccionada = taskDate.value;
+    const fechaLimite = taskDateLimit.value
     if (tastValue != '') {
-        const nuevaTarea = new Tarea(tastValue,fechaSeleccionada || null);
+        const nuevaTarea = new Tarea(tastValue,fechaSeleccionada || null,fechaLimite || null);
         tareas.push(nuevaTarea)
         guardarTareas();
         input.value = '';
         taskDate.value = ''; 
         mostrarTarea(nuevaTarea)
     }
+});
+
+botonLimpiar.addEventListener('click', function () {
+    localStorage.clear();
+    tareas = []; 
+    taskList.innerHTML = ''
 });
