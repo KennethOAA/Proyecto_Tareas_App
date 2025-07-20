@@ -1,12 +1,19 @@
 import { Tarea } from './tarea.js';
-
+//localStorage.clear();
 const input = document.getElementById('taskInput');
 const boton = document.getElementById('addTaskButton');
 const taskList = document.getElementById('taskList');
+const taskDate = document.getElementById('taskDate');
+const taskDateLimit = document.getElementById('taskDateLimit');
 
 function mostrarTarea(tarea) {
     const li = document.createElement('li');
-    li.textContent = tarea.getTexto()
+    li.innerHTML = `
+  <div>
+    <span>${tarea.getTexto()}</span>
+    ${tarea.getFechaAgendada() ? `<br>📅 ${tarea.getFechaAgendada()}` : ''}
+  </div>
+`;
     li.className = "bg-white p-3 rounded shadow hover:bg-gray-100 cursor-pointer";
     taskList.appendChild(li);
     li.addEventListener('click', function () {
@@ -44,12 +51,13 @@ if (tareasGuardadas) {
 
 boton.addEventListener('click', function () {
     const tastValue = input.value.trim();
+    const fechaSeleccionada = taskDate.value;
     if (tastValue != '') {
-        const nuevaTarea = new Tarea(tastValue);
+        const nuevaTarea = new Tarea(tastValue,fechaSeleccionada || null);
         tareas.push(nuevaTarea)
         guardarTareas();
         input.value = '';
-        //Muestra la nueva tarea al guardarla
+        taskDate.value = ''; 
         mostrarTarea(nuevaTarea)
     }
 });

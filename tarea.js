@@ -1,8 +1,10 @@
 export class Tarea {
-    constructor(texto) {
+    constructor(texto,fechaAgendada = null,fechaLimite=null) {
         this.texto = texto;
         this.completada = false;
         this.fechaCreacion = new Date().toISOString();
+        this.fechaAgendada = fechaAgendada;
+        this.fechaLimite = fechaLimite;
     }
 
 
@@ -19,6 +21,13 @@ export class Tarea {
         const fechaCreacion = new Date(this.fechaCreacion);
         const diferenciaDias = Math.floor((fechaActual - fechaCreacion) / (1000 * 60 * 60 * 24));
         return diferenciaDias > 1 ? "Tarea antigua" : "Tarea reciente";
+    }
+
+    getFechaAgendada() {
+        return this.fechaAgendada; 
+    }
+    setFechaAgendada(fecha) {
+        this.fechaAgendada = fecha;
     }
 
 
@@ -44,6 +53,14 @@ export class Tarea {
 
     setFechaCreacion(fecha) {
         this.fechaCreacion = fecha;
+    }
+
+    getFechaLimite() {
+        return this.fechaLimite;
+    }
+
+    setFechaLimite(fecha) {
+        this.fechaLimite = fecha;
     }
 
 }
